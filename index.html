@@ -12,6 +12,16 @@
             padding: 0;
         }
 
+        div {
+          position: absolute;
+        }
+
+        h2 {
+          position: static;
+          display: inline-block;
+        }
+
+
         img {
             display: none;
         }
@@ -20,6 +30,11 @@
 </head>
 
 <body>
+  <div>
+  <h2 id="score">Score:</h2>
+  <h2 id="timer"></h2>
+  </div>
+
 
     <canvas id="canvas"></canvas>
     <img src="./img/jet.png" id="Jet" alt="">
@@ -33,7 +48,8 @@
     <script src='Environment.js'></script>
     <script src='Jet.js'></script>
     <script src='Pipe.js'></script>
-    <script src='main.js'></script>
+    <script src='prod.js'></script>
+    <script src='timer.js'></script>
 
 </body>
 
