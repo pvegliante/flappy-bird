@@ -6,7 +6,7 @@ function timer() {
   this.start = function() {
     timerInterval = setInterval(function() {
       seconds++;
-    }, 1);
+    }, 100);
   };
 
   this.stop = function() {

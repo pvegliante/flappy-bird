@@ -17,19 +17,32 @@ const Jet = function(x, y, ctx) {
         document.getElementById('f3')
     ];
     var self = this;
+    this.spDown = false;
     window.addEventListener('keydown', function(e) {
         event.preventDefault();
         if (e.keyCode === 32) {
-            self.velY = -5;
+            self.spDown = true;
+
+        }
+    })
+
+    window.addEventListener('keyup', function(e) {
+        event.preventDefault();
+        if (e.keyCode === 32) {
+            self.spDown = false;
         }
     })
 };
 
 Jet.prototype.update = function(pipes) {
     this.ticks++;
-    if (this.ticks % 30 === 0) this.burnIndex = (this.burnIndex+1) % this.burn.length;
+    if (this.ticks % 30 === 0) this.burnIndex = (this.burnIndex + 1) % this.burn.length;
+    if (this.spDown){
+      this.velY -= .35;
+    }else {
+      this.velY += .3;
+    }
     this.y += this.velY;
-    this.velY += .25;
     if (this.detectCollisions(pipes)) {
         this.dead = true;
     };
@@ -40,7 +53,11 @@ Jet.prototype.render = function() {
     let renderY = -this.height / 2;
     this.ctx.save();
     this.ctx.translate(this.x, this.y);
-    let angle = Math.PI / 7 * this.velY / 5;
+    var angleSpeed = 5;
+    if (this.spDown === true) {
+        angleSpeed === -5;
+    }
+    let angle = Math.PI / 7 * this.velY / angleSpeed;
     this.ctx.rotate(angle)
     if (!this.dead) {
         this.ctx.drawImage(this.sprites[0], renderX, renderY);
