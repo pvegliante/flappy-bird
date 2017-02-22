@@ -38,7 +38,7 @@ Jet.prototype.update = function(pipes) {
     this.ticks++;
     if (this.ticks % 30 === 0) this.burnIndex = (this.burnIndex + 1) % this.burn.length;
     if (this.spDown){
-      this.velY -= .35;
+      this.velY -= .5;
     }else {
       this.velY += .3;
     }

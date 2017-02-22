@@ -9,6 +9,7 @@ const Pipe = function(xpos, ypos, length, speed, ctx) {
 
 Pipe.prototype.update = function() {
     this.xpos -= this.speed;
+    this.speed = this.speed + 1;
 };
 
 Pipe.prototype.render = function() {

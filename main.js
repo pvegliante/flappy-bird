@@ -14,7 +14,7 @@ window.onload = function() {
     setInterval(function() {
         let pipeSet = generateRandomPipes(ctx, c.width, c.height);
         pipes.push(pipeSet.top, pipeSet.bottom);
-    }, 2000);
+    }, 1000);
     var clock = new timer();
     clock.start();
     gameLoop();
