@@ -4,14 +4,13 @@ const Jet = function(x, y, ctx) {
     this.y = y;
     this.velY = 0;
     this.crash = document.getElementById("crash");
+    this.fly = document.getElementById("fly");
     this.width = 55;
     this.height = 15;
     this.ticks = 0;
     this.burnIndex = 0;
     this.dead = false;
-    this.sprites = [
-        document.getElementById('Jet')
-    ];
+    this.sprites = [document.getElementById('Jet')];
     this.burn = [
         document.getElementById('f1'),
         document.getElementById('f2'),
@@ -22,7 +21,8 @@ const Jet = function(x, y, ctx) {
     window.addEventListener('keydown', function(e) {
         event.preventDefault();
         if (e.keyCode === 32) {
-            self.spDown = true;7
+            self.spDown = true;
+            7
         }
     })
 
@@ -54,8 +54,7 @@ Jet.prototype.render = function() {
     this.ctx.save();
     this.ctx.translate(this.x, this.y);
     var angleSpeed = 5;
-    // var fly = document.getElementById("fly");
-    // fly.play();
+    this.fly.play();
     if (this.spDown === true) {
         angleSpeed === -5;
     }
@@ -84,6 +83,8 @@ Jet.prototype.detectCollisions = function(pipes) {
             let b = this.y - this.height / 2;
             if (a > x0 && a < x1 && b < y0 ||
                 a2 > x0 && a2 < x1 && b < y0) {
+                this.fly.pause();
+                setTimeout(()=>{this.fly.currentTime = 0;},5);
                 this.crash.play();
                 return true;
             }
@@ -93,6 +94,8 @@ Jet.prototype.detectCollisions = function(pipes) {
             let b = this.y + this.height / 2;
             if (a > x0 && a < x1 && b > y2 ||
                 a2 > x0 && a2 < x1 && b2 > y2) {
+                this.fly.pause();
+                setTimeout(()=>{this.fly.currentTime = 0;},5);
                 this.crash.play();
                 return true;
             }
