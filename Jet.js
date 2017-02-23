@@ -22,7 +22,6 @@ const Jet = function(x, y, ctx) {
         event.preventDefault();
         if (e.keyCode === 32) {
             self.spDown = true;
-
         }
     })
 
@@ -37,10 +36,10 @@ const Jet = function(x, y, ctx) {
 Jet.prototype.update = function(pipes) {
     this.ticks++;
     if (this.ticks % 30 === 0) this.burnIndex = (this.burnIndex + 1) % this.burn.length;
-    if (this.spDown){
-      this.velY -= .5;
-    }else {
-      this.velY += .3;
+    if (this.spDown) {
+        this.velY -= .5;
+    } else {
+        this.velY += .3;
     }
     this.y += this.velY;
     if (this.detectCollisions(pipes)) {
@@ -54,6 +53,8 @@ Jet.prototype.render = function() {
     this.ctx.save();
     this.ctx.translate(this.x, this.y);
     var angleSpeed = 5;
+    var fly = document.getElementById("fly");
+    // fly.play();
     if (this.spDown === true) {
         angleSpeed === -5;
     }
@@ -65,11 +66,11 @@ Jet.prototype.render = function() {
         this.ctx.drawImage(this.burn[this.burnIndex], renderX, renderY);
     }
     this.ctx.restore();
-
 };
 
 Jet.prototype.detectCollisions = function(pipes) {
     let collisionDetected = false;
+    var audio = document.getElementById("crash");
     for (var i = 0; i < pipes.length; i++) {
         let e = pipes[i];
         let highPipe = e.ypos <= 0;
@@ -83,6 +84,7 @@ Jet.prototype.detectCollisions = function(pipes) {
             let b = this.y - this.height / 2;
             if (a > x0 && a < x1 && b < y0 ||
                 a2 > x0 && a2 < x1 && b < y0) {
+                audio.play();
                 return true;
             }
         } else {
@@ -91,6 +93,7 @@ Jet.prototype.detectCollisions = function(pipes) {
             let b = this.y + this.height / 2;
             if (a > x0 && a < x1 && b > y2 ||
                 a2 > x0 && a2 < x1 && b2 > y2) {
+                audio.play();
                 return true;
             }
         }

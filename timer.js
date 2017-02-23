@@ -17,7 +17,6 @@ function delta() {
 }
 
 function timeFormatter() {
-
   this.isOn = false;
   this.start = function() {
     if(this.isOn) {

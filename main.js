@@ -1,5 +1,6 @@
 var timer = require('./score.js');
 
+
 window.onload = function() {
     const c = document.getElementById('canvas');
     c.width = window.innerWidth;
@@ -30,7 +31,7 @@ window.onload = function() {
         });
         jet.update(pipes);
         jet.render();
-        if (jet.dead) {
+        if (jet.dead) {          
             console.log("BOOM!");
             clock.stop();
             drawGameOver(ctx);
