@@ -9,14 +9,13 @@ const Pipe = function(xpos, ypos, length, speed, ctx) {
 
 Pipe.prototype.update = function() {
     this.xpos -= this.speed;
-    this.speed = this.speed + 1;
 };
 
 Pipe.prototype.render = function() {
     this.ctx.save();
     this.ctx.fillStyle = "#000000";
-    this.ctx.fillRect(this.xpos-5, this.ypos, this.width+10, this.length+10);
+    this.ctx.fillRect(this.xpos - 5, this.ypos, this.width + 10, this.length + 10);
     this.ctx.fillStyle = "#BDAC40"
-    this.ctx.fillRect(this.xpos, this.ypos+5, this.width, this.length);
+    this.ctx.fillRect(this.xpos, this.ypos + 5, this.width, this.length);
     this.ctx.restore();
 };

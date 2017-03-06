@@ -10,12 +10,20 @@ window.onload = function() {
     const environment = new Environment(c, ctx);
     const jet = new Jet(350, 100, ctx);
     const pipes = [];
-    let pipeSet = generateRandomPipes(ctx, c.width, c.height);
+    let speed = 4;
+    setInterval(function() {
+      speed = speed + 1;
+    }, 30000)
+    let pipeSet = generateRandomPipes(ctx, c.width, c.height, speed);
+    console.log(speed);
+
     pipes.push(pipeSet.top, pipeSet.bottom);
     setInterval(function() {
-        let pipeSet = generateRandomPipes(ctx, c.width, c.height);
+
+        console.log(speed);
+        let pipeSet = generateRandomPipes(ctx, c.width, c.height, speed);
         pipes.push(pipeSet.top, pipeSet.bottom);
-    }, 1000);
+    }, 30000);
     var clock = new timer();
     clock.start();
     gameLoop();
@@ -31,7 +39,7 @@ window.onload = function() {
         });
         jet.update(pipes);
         jet.render();
-        if (jet.dead) {          
+        if (jet.dead) {
             console.log("BOOM!");
             clock.stop();
             drawGameOver(ctx);
@@ -41,12 +49,12 @@ window.onload = function() {
     }
 };
 
-function generateRandomPipes(ctx, canvasWidth, canvasHeight) {
+function generateRandomPipes(ctx, canvasWidth, canvasHeight, speed) {
     let lengthTop = Math.round(Math.random() * 200 + 50);
     let lengthBottom = canvasHeight - 150 - lengthTop;
     let returnVal = {};
-    returnVal.top = new Pipe(canvasWidth, -5, lengthTop, 4, ctx);
-    returnVal.bottom = new Pipe(canvasWidth, canvasHeight + 5 - lengthBottom, lengthBottom, 4, ctx);
+    returnVal.top = new Pipe(canvasWidth, -5, lengthTop, speed, ctx);
+    returnVal.bottom = new Pipe(canvasWidth, canvasHeight + 5 - lengthBottom, lengthBottom, speed, ctx);
     return returnVal;
 };
 
